@@ -1,5 +1,6 @@
 import StyledForm from "./style";
 import { useState } from "react";
+import Input from "../Input";
 
 const Search = () => {
   const [search, setSearch] = useState("");
@@ -17,7 +18,7 @@ const Search = () => {
 
   return (
     <StyledForm onSubmit={submitSearch}>
-      <input
+      <Input
         className="search-input"
         placeholder="Buscar..."
         onChange={handleChange(setSearch)}

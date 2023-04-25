@@ -13,4 +13,24 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
   }
+  .users-box {
+    padding: 0 2rem;
+  }
+  table {
+    width: 100%;
+    height: 100%;
+    text-align: left;
+  }
+  th {
+    padding: 1rem 0 5px;
+  }
+  td {
+    padding: 5px 0;
+  }
+  .user-buttons {
+    text-align: right;
+    > button {
+      margin-left: 1rem;
+    }
+  }
 `;
