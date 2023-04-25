@@ -2,10 +2,13 @@ import { Container } from "./style";
 import logo from "../../img/logo.png";
 import Button from "../../components/Button";
 import Search from "../../components/Search";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Modal from "react-modal";
 import { useState, useEffect } from "react";
 import UserForm from "../../components/UserForm";
+import UserFormEdit from "../../components/UserFormEdit";
+import axios from "axios";
+import { removeUser } from "../../store/modules/users/actions";
 
 const customStyles = {
   content: {
@@ -24,6 +27,15 @@ export const Home = () => {
   const [search, setSearch] = useState("");
   const [searchType, setSearchType] = useState("");
   const [usersFiltered, setUsersFiltered] = useState(users);
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    birth: "",
+    city: "",
+  });
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setUsersFiltered(
@@ -37,6 +49,23 @@ export const Home = () => {
 
   const closeModal = () => {
     setIsOpen(false);
+  };
+
+  const editUser = (user) => () => {
+    setData(user);
+    openModal();
+  };
+
+  const deleteUser = (user) => () => {
+    axios
+      .delete(`http://127.0.0.1:5000/user/${user.id}`)
+      .then((response) => {
+        console.log(response);
+        dispatch(removeUser(user));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -79,10 +108,17 @@ export const Home = () => {
                     <td>{user.city}</td>
                     <td>
                       <div className="user-buttons">
-                        <Button>
+                        <Button onClick={editUser(user)}>
                           <i className="fa-regular fa-pen-to-square"></i>
                         </Button>
-                        <Button>
+                        <Modal
+                          isOpen={modalIsOpen}
+                          onRequestClose={closeModal}
+                          style={customStyles}
+                        >
+                          <UserFormEdit closeModal={closeModal} data={data} />
+                        </Modal>
+                        <Button onClick={deleteUser(user)}>
                           <i className="fa-regular fa-trash-can"></i>
                         </Button>
                       </div>
@@ -98,10 +134,17 @@ export const Home = () => {
                     <td>{user.city}</td>
                     <td>
                       <div className="user-buttons">
-                        <Button>
+                        <Button onClick={editUser(user)}>
                           <i className="fa-regular fa-pen-to-square"></i>
                         </Button>
-                        <Button>
+                        <Modal
+                          isOpen={modalIsOpen}
+                          onRequestClose={closeModal}
+                          style={customStyles}
+                        >
+                          <UserFormEdit closeModal={closeModal} data={data} />
+                        </Modal>
+                        <Button onClick={deleteUser(user)}>
                           <i className="fa-regular fa-trash-can"></i>
                         </Button>
                       </div>

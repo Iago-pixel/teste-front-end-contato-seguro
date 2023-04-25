@@ -8,7 +8,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUsers } from "../../store/modules/users/actions";
 
-const UserForm = ({ closeModal }) => {
+const UserFormEdit = ({ data, closeModal }) => {
   const dispatch = useDispatch();
 
   const formSchema = yup.object().shape({
@@ -28,22 +28,20 @@ const UserForm = ({ closeModal }) => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
-    clearErrors,
   } = useForm({
     resolver: yupResolver(formSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-      birth: "",
-      city: "",
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      birth: data.birth,
+      city: data.city,
     },
   });
 
   const onSubmitFunction = (data) => {
     axios
-      .post("http://127.0.0.1:5000/user", data)
+      .patch(`http://127.0.0.1:5000/user/${data.id}`, data)
       .then((response) => {
         console.log(response);
         dispatch(addUsers([data]));
@@ -54,16 +52,11 @@ const UserForm = ({ closeModal }) => {
       });
   };
 
-  const cleanForm = () => {
-    reset({ name: "", email: "", phone: "", birth: "", city: "" });
-    clearErrors();
-  };
-
   return (
     <Container>
       <form onSubmit={handleSubmit(onSubmitFunction)}>
         <div className="form-header">
-          <h1>Inserir</h1>
+          <h1>Editar</h1>
           <button onClick={() => closeModal()}>x</button>
         </div>
         <div className="input-box">
@@ -94,13 +87,6 @@ const UserForm = ({ closeModal }) => {
           <span>{errors.city?.message}</span>
         </div>
         <div>
-          <Button
-            type="button"
-            onClick={() => cleanForm()}
-            className="form-button"
-          >
-            Limpar
-          </Button>
           <Button type="submit" className="form-button">
             Enviar
           </Button>
@@ -110,4 +96,4 @@ const UserForm = ({ closeModal }) => {
   );
 };
 
-export default UserForm;
+export default UserFormEdit;
