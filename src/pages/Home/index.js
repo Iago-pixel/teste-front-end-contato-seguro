@@ -4,7 +4,7 @@ import Button from "../../components/Button";
 import Search from "../../components/Search";
 import { useSelector } from "react-redux";
 import Modal from "react-modal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import UserForm from "../../components/UserForm";
 
 const customStyles = {
@@ -21,6 +21,15 @@ const customStyles = {
 export const Home = () => {
   const users = useSelector((state) => state.users);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const [searchType, setSearchType] = useState("");
+  const [usersFiltered, setUsersFiltered] = useState(users);
+
+  useEffect(() => {
+    setUsersFiltered(
+      users.filter((user) => user[searchType]?.includes(search))
+    );
+  }, [search, searchType, users]);
 
   const openModal = () => {
     setIsOpen(true);
@@ -44,9 +53,9 @@ export const Home = () => {
           onRequestClose={closeModal}
           style={customStyles}
         >
-          <UserForm />
+          <UserForm closeModal={closeModal} />
         </Modal>
-        <Search />
+        <Search setSearch={setSearch} setSearchType={setSearchType} />
       </div>
       <div className="users-box">
         <table>
@@ -60,25 +69,45 @@ export const Home = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr key={user.id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.phone}</td>
-                <td>{user.birth}</td>
-                <td>{user.city}</td>
-                <td>
-                  <div className="user-buttons">
-                    <Button>
-                      <i class="fa-regular fa-pen-to-square"></i>
-                    </Button>
-                    <Button>
-                      <i class="fa-regular fa-trash-can"></i>
-                    </Button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+            {search
+              ? usersFiltered.map((user) => (
+                  <tr key={user.id}>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.phone}</td>
+                    <td>{user.birth}</td>
+                    <td>{user.city}</td>
+                    <td>
+                      <div className="user-buttons">
+                        <Button>
+                          <i className="fa-regular fa-pen-to-square"></i>
+                        </Button>
+                        <Button>
+                          <i className="fa-regular fa-trash-can"></i>
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              : users.map((user) => (
+                  <tr key={user.id}>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.phone}</td>
+                    <td>{user.birth}</td>
+                    <td>{user.city}</td>
+                    <td>
+                      <div className="user-buttons">
+                        <Button>
+                          <i className="fa-regular fa-pen-to-square"></i>
+                        </Button>
+                        <Button>
+                          <i className="fa-regular fa-trash-can"></i>
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
           </tbody>
         </table>
       </div>

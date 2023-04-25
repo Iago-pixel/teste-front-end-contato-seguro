@@ -1,36 +1,34 @@
 import StyledForm from "./style";
-import { useState } from "react";
 import Input from "../Input";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-const Search = () => {
-  const [search, setSearch] = useState("");
-  const [searchType, setSearchType] = useState("Nome");
+const Search = ({ setSearch, setSearchType }) => {
+  const formSchema = yup.object().shape({
+    search: yup.string().required("Campo vazio"),
+    searchType: yup.string(),
+  });
 
-  const handleChange = (set) => (e) => {
-    set(e.target.value);
-    console.log(`search: ${search}`);
-    console.log(`searchType: ${searchType}`);
-  };
+  const { register, handleSubmit } = useForm({
+    resolver: yupResolver(formSchema),
+  });
 
-  const submitSearch = (e) => {
-    e.preventDefault();
+  const submitSearch = ({ search, searchType }) => {
+    setSearch(search);
+    setSearchType(searchType);
   };
 
   return (
-    <StyledForm onSubmit={submitSearch}>
+    <StyledForm onSubmit={handleSubmit(submitSearch)}>
       <Input
+        name="search"
+        register={register}
         className="search-input"
         placeholder="Buscar..."
-        onChange={handleChange(setSearch)}
-        value={search}
         required
       />
-      <select
-        className="select-input"
-        defaultValue={searchType}
-        onChange={handleChange(setSearchType)}
-        required
-      >
+      <select {...register("searchType")} className="select-input" required>
         <option value="name">Nome</option>
         <option value="email">E-mail</option>
         <option value="phone">Telefone</option>
