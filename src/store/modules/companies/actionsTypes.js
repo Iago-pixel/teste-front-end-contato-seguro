@@ -1,0 +1,1 @@
+export const ADD_COMPANIES = "ADD_COMPANIES";

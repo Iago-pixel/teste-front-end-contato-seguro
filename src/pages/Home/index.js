@@ -9,6 +9,9 @@ import UserForm from "../../components/UserForm";
 import UserFormEdit from "../../components/UserFormEdit";
 import axios from "axios";
 import { removeUser } from "../../store/modules/users/actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faUser } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const customStyles = {
   content: {
@@ -108,8 +111,11 @@ export const Home = () => {
                     <td>{user.city}</td>
                     <td>
                       <div className="user-buttons">
+                        <Button>
+                          <FontAwesomeIcon icon={faUser} />
+                        </Button>
                         <Button onClick={editUser(user)}>
-                          <i className="fa-regular fa-pen-to-square"></i>
+                          <FontAwesomeIcon icon={faEdit} />
                         </Button>
                         <Modal
                           isOpen={modalIsOpen}
@@ -134,8 +140,13 @@ export const Home = () => {
                     <td>{user.city}</td>
                     <td>
                       <div className="user-buttons">
+                        <Link to={`/${user.id}`}>
+                          <Button>
+                            <FontAwesomeIcon icon={faUser} />
+                          </Button>
+                        </Link>
                         <Button onClick={editUser(user)}>
-                          <i className="fa-regular fa-pen-to-square"></i>
+                          <FontAwesomeIcon icon={faEdit} />
                         </Button>
                         <Modal
                           isOpen={modalIsOpen}
