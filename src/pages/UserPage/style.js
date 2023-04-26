@@ -26,20 +26,29 @@ export const Container = styled.div`
   td {
     padding: 5px 0;
   }
-  .add-company-box {
-    select {
-      border: 1px solid #c6c6c6;
-      border-radius: 5px;
-      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-      text-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-      color: grey;
-      width: 7rem;
-      padding: 0 0 0 5px;
-      magim: 0;
-      height: 34px;
-    }
-    button {
-      width: auto;
-    }
+  h1 {
+    text-align: center;
+  }
+`;
+
+export const SelectForm = styled.div`
+  text-align: center;
+  select {
+    border: 1px solid #c6c6c6;
+    border-radius: 5px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    text-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    color: grey;
+    width: 7rem;
+    padding: 0 0 0 5px;
+    height: 34px;
+  }
+  button {
+    font-size: 1rem;
+    width: auto;
+    margin-left: 1rem;
+  }
+  .add-company-button {
+    margin: 3rem 0 1rem;
   }
 `;

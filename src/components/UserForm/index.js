@@ -5,8 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Button from "../Button";
 import Container from "./style";
 import axios from "axios";
+import { addCount } from "../../store/modules/count/actions";
 import { useDispatch } from "react-redux";
-import { addUsers } from "../../store/modules/users/actions";
 
 const UserForm = ({ closeModal }) => {
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const UserForm = ({ closeModal }) => {
       .post("http://127.0.0.1:5000/user", data)
       .then((response) => {
         console.log(response);
-        dispatch(addUsers([data]));
+        dispatch(addCount());
         closeModal();
       })
       .catch((error) => {

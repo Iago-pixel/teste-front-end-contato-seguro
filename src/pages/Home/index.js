@@ -46,6 +46,17 @@ export const Home = () => {
     );
   }, [search, searchType, users]);
 
+  const addUser = () => {
+    setData({
+      name: "",
+      email: "",
+      phone: "",
+      birth: "",
+      city: "",
+    });
+    openModal();
+  };
+
   const openModal = () => {
     setIsOpen(true);
   };
@@ -77,15 +88,19 @@ export const Home = () => {
         <img src={logo} alt="" />
       </div>
       <div className="inputs-box">
-        <Button onClick={openModal}>
-          <i class="fa-regular fa-plus"></i>
+        <Button onClick={() => addUser()}>
+          <i className="fa-regular fa-plus"></i>
         </Button>
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
           style={customStyles}
         >
-          <UserForm closeModal={closeModal} />
+          {data.email ? (
+            <UserFormEdit closeModal={closeModal} data={data} />
+          ) : (
+            <UserForm closeModal={closeModal} />
+          )}
         </Modal>
         <Search setSearch={setSearch} setSearchType={setSearchType} />
       </div>
@@ -117,13 +132,6 @@ export const Home = () => {
                         <Button onClick={editUser(user)}>
                           <FontAwesomeIcon icon={faEdit} />
                         </Button>
-                        <Modal
-                          isOpen={modalIsOpen}
-                          onRequestClose={closeModal}
-                          style={customStyles}
-                        >
-                          <UserFormEdit closeModal={closeModal} data={data} />
-                        </Modal>
                         <Button onClick={deleteUser(user)}>
                           <i className="fa-regular fa-trash-can"></i>
                         </Button>
@@ -148,13 +156,6 @@ export const Home = () => {
                         <Button onClick={editUser(user)}>
                           <FontAwesomeIcon icon={faEdit} />
                         </Button>
-                        <Modal
-                          isOpen={modalIsOpen}
-                          onRequestClose={closeModal}
-                          style={customStyles}
-                        >
-                          <UserFormEdit closeModal={closeModal} data={data} />
-                        </Modal>
                         <Button onClick={deleteUser(user)}>
                           <i className="fa-regular fa-trash-can"></i>
                         </Button>

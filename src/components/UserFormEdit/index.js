@@ -6,7 +6,7 @@ import Button from "../Button";
 import Container from "./style";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { addUsers } from "../../store/modules/users/actions";
+import { addCount } from "../../store/modules/count/actions";
 
 const UserFormEdit = ({ data, closeModal }) => {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const UserFormEdit = ({ data, closeModal }) => {
       .patch(`http://127.0.0.1:5000/user/${data.id}`, data)
       .then((response) => {
         console.log(response);
-        dispatch(addUsers([data]));
+        dispatch(addCount());
         closeModal();
       })
       .catch((error) => {

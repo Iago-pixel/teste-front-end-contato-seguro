@@ -7,12 +7,13 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { Container } from "./style";
+import { Container, SelectForm } from "./style";
 import logo from "../../img/logo.png";
 import Button from "../../components/Button";
 import Search from "../../components/Search";
 import { Link } from "react-router-dom";
-import { addCompanies } from "../../store/modules/companies/actions";
+import { addCount } from "../../store/modules/count/actions";
+import CompanyForm from "../../components/CompanyForm";
 
 const customStyles = {
   content: {
@@ -26,8 +27,9 @@ const customStyles = {
 };
 
 export const UserPage = () => {
-  const allCompanies = useSelector((state) => state.companies);
   const dispatch = useDispatch();
+
+  const allCompanies = useSelector((state) => state.companies);
 
   const { id } = useParams();
   const [user, setUser] = useState({
@@ -39,31 +41,19 @@ export const UserPage = () => {
   });
   const [companies, setCompanies] = useState([]);
   const [companiesFiltered, setCompaniesFiltered] = useState([]);
+  const [createCompany, setCreateCompany] = useState(false);
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [searchType, setSearchType] = useState("");
 
   const formSchema = yup.object().shape({
-    search: yup.string().required("Campo vazio"),
-    searchType: yup.string(),
+    company_id: yup.number(),
   });
 
   const { register, handleSubmit } = useForm({
     resolver: yupResolver(formSchema),
   });
-
-  const submitSelect = ({ company_id }) => {
-    axios
-      .patch(`http://127.0.0.1:5000/user/${id}/${company_id}`)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    closeModal();
-  };
 
   useEffect(() => {
     axios
@@ -97,7 +87,21 @@ export const UserPage = () => {
   };
 
   const closeModal = () => {
+    setCreateCompany(false);
     setIsOpen(false);
+  };
+
+  const submitSelect = ({ company_id }) => {
+    axios
+      .patch(`http://127.0.0.1:5000/user/${id}/${company_id}`)
+      .then((response) => {
+        console.log(response);
+        dispatch(addCount());
+        closeModal();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -115,20 +119,31 @@ export const UserPage = () => {
           onRequestClose={closeModal}
           style={customStyles}
         >
-          <div className="add-company-box">
-            <form onSubmit={handleSubmit(submitSelect)}>
-              <select {...register("company_id")}>
-                {allCompanies.map((company) => (
-                  <option value={company.id} id={company.id}>
-                    {company.name}
-                  </option>
-                ))}
-              </select>
-              <Button type="submit">+</Button>
-            </form>
-          </div>
+          {createCompany ? (
+            <CompanyForm closeModal={closeModal} />
+          ) : (
+            <SelectForm>
+              <form onSubmit={handleSubmit(submitSelect)}>
+                <select {...register("company_id")}>
+                  {allCompanies.map((company) => (
+                    <option value={company.id} id={company.id}>
+                      {company.name}
+                    </option>
+                  ))}
+                </select>
+                <Button type="submit">
+                  <i className="fa-regular fa-plus"></i>
+                </Button>
+              </form>
+              <Button
+                onClick={() => setCreateCompany(true)}
+                className="add-company-button"
+              >
+                Adicionar empresa
+              </Button>
+            </SelectForm>
+          )}
         </Modal>
-        <Search setSearch={setSearch} setSearchType={setSearchType} />
       </div>
       <div className="companies-box">
         <table>
