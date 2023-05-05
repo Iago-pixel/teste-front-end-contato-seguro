@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# Teste backend Contato Seguro
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Site desenvolvido para um teste técnico da Contato Seguro. Ele lista usuários com seus dados e permite criar, editar e excluir eles. Além disso é possivel ver todas as empresas vinculadas a um usuário.
 
-## Available Scripts
+<br>
 
-In the project directory, you can run:
+<div align="center"><img src="./src/img/site.png"></div>
 
-### `npm start`
+<br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<h4 align="center"> 
+	🚧  Em construção...  🚧
+</h4>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Features
 
-### `npm test`
+- [x] Cadastro de usuário
+- [x] Cadastro da empresa
+- [x] Mostrar usuários
+- [x] Mostrar empresas vinculadas ao usuário
+- [x] Edição do usuário
+- [ ] Edição da empresa
+- [x] Remoção do usuário
+- [ ] Remoção da empresa
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br>
 
-### `npm run build`
+### Pré-requisitos
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
+Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🎲 Rodando o Back End (servidor)
 
-### `npm run eject`
+```bash
+# Clone este repositório
+$ git clone https://github.com/Iago-pixel/teste-front-end-contato-seguro.git
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Acesse a pasta do projeto no terminal/cmd
+$ cd teste-front-end-contato-seguro
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Instale as dependências
+$ npm install
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Execute a aplicação em modo de desenvolvimento
+$ npm start
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# O servidor inciará na porta:3000 - acesse http://localhost:3000
+```
 
-## Learn More
+<br>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 🛠 Tecnologias
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+As seguintes ferramentas foram usadas na construção do projeto:
 
-### Code Splitting
+[![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/)
+[![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/en)
+[![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://react.dev/)
+[![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)](https://redux.js.org/)
+[![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<br>
 
-### Analyzing the Bundle Size
+<img style="border-radius: 50%;" src="./src/img/perfil.jpeg" width="100px;" alt=""/>
+<br />
+<sub><b>Iago Vinícius</b></sub>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Feito com ❤️ por Iago Vinícius 👋🏽 Entre em contato!
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[![Linkedin Badge](https://img.shields.io/badge/-Iago%20Vinícius-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/iago-vinicius-souza/)](https://www.linkedin.com/in/iago-vinicius-souza/)
+![Whatsapp Badge](https://img.shields.io/badge/-+5584987473102-25D366?style=flat-square&logo=whatsapp&logoColor=white&link=tel:+5584987473102)
+[![Hotmail Badge](https://img.shields.io/badge/-pristonvinicius@hotmail.com-0078D4?style=flat-square&logo=microsoft-outlook&logoColor=white&link=mailto:pristonvinicius@hotmail.com)](mailto:pristonvinicius@hotmail.com)
